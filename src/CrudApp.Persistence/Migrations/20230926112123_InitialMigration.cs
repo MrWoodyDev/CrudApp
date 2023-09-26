@@ -22,18 +22,54 @@ namespace CrudApp.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Checks",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Checks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CheckProducts",
+                columns: table => new
+                {
+                    CheckId = table.Column<long>(type: "bigint", nullable: false),
+                    ProductId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CheckProducts", x => new { x.CheckId, x.ProductId });
+                    table.ForeignKey(
+                        name: "FK_CheckProducts_Checks_CheckId",
+                        column: x => x.CheckId,
+                        principalTable: "Checks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CheckProducts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,6 +97,11 @@ namespace CrudApp.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_CheckProducts_ProductId",
+                table: "CheckProducts",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductsCategories_CategoryId",
                 table: "ProductsCategories",
                 column: "CategoryId");
@@ -69,7 +110,13 @@ namespace CrudApp.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CheckProducts");
+
+            migrationBuilder.DropTable(
                 name: "ProductsCategories");
+
+            migrationBuilder.DropTable(
+                name: "Checks");
 
             migrationBuilder.DropTable(
                 name: "Categories");

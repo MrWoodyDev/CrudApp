@@ -9,5 +9,9 @@ public class ProductEntityConfiguration : IEntityTypeConfiguration<Product>
     public void Configure(EntityTypeBuilder<Product> builder)
     {
         builder.HasKey(product => product.Id);
+
+        builder.Property(product => product.Price)
+            .IsRequired()
+            .HasColumnType("decimal(8, 2)");
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CrudApp.Persistence.Migrations
 {
     [DbContext(typeof(CrudAppDbContext))]
-    [Migration("20230925095233_InitialMigration")]
+    [Migration("20230926112123_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,34 @@ namespace CrudApp.Persistence.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("CrudApp.Core.Domain.Checks.Models.Check", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Checks");
+                });
+
+            modelBuilder.Entity("CrudApp.Core.Domain.Checks.Models.CheckProducts", b =>
+                {
+                    b.Property<long>("CheckId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("CheckId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CheckProducts");
+                });
+
             modelBuilder.Entity("CrudApp.Core.Domain.Products.Models.Product", b =>
                 {
                     b.Property<long>("Id")
@@ -53,7 +81,7 @@ namespace CrudApp.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(8,2)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -76,6 +104,25 @@ namespace CrudApp.Persistence.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("ProductsCategories");
+                });
+
+            modelBuilder.Entity("CrudApp.Core.Domain.Checks.Models.CheckProducts", b =>
+                {
+                    b.HasOne("CrudApp.Core.Domain.Checks.Models.Check", "Check")
+                        .WithMany("CheckProducts")
+                        .HasForeignKey("CheckId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CrudApp.Core.Domain.Products.Models.Product", "Product")
+                        .WithMany("CheckProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Check");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("CrudApp.Core.Domain.Products.Models.ProductCategory", b =>
@@ -102,8 +149,15 @@ namespace CrudApp.Persistence.Migrations
                     b.Navigation("ProductCategory");
                 });
 
+            modelBuilder.Entity("CrudApp.Core.Domain.Checks.Models.Check", b =>
+                {
+                    b.Navigation("CheckProducts");
+                });
+
             modelBuilder.Entity("CrudApp.Core.Domain.Products.Models.Product", b =>
                 {
+                    b.Navigation("CheckProducts");
+
                     b.Navigation("ProductCategory");
                 });
 #pragma warning restore 612, 618
