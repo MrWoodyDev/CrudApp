@@ -1,4 +1,5 @@
-﻿using CrudApp.Core.Domain.Checks.Models;
+﻿using CrudApp.Core.Domain.Categories.Models;
+using CrudApp.Core.Domain.Checks.Models;
 using CrudApp.Core.Domain.Products.Data;
 
 namespace CrudApp.Core.Domain.Products.Models;
@@ -28,9 +29,9 @@ public class Product
 
     public int Quantity { get; set; }
 
-    public IReadOnlyCollection<ProductCategory> ProductCategory { get; set; }
+    public ICollection<Category> Categories { get; set; }
 
-    public IReadOnlyCollection<CheckProducts> CheckProducts { get; set; }
+    public ICollection<Check> Checks { get; set; }
 
     public static async Task<Product> CreateAsync(string name, decimal price, int quantity)
     {

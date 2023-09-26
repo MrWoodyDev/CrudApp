@@ -17,11 +17,7 @@ public class CrudAppDbContext : DbContext
 
     public DbSet<Category> Categories { get; set; }
 
-    public DbSet<ProductCategory> ProductsCategories { get; set; }
-
     public DbSet<Check> Checks { get; set; }
-
-    public DbSet<CheckProducts> CheckProducts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -31,8 +27,6 @@ public class CrudAppDbContext : DbContext
     {
         modelBuilder.ApplyConfiguration(new ProductEntityConfiguration());
         modelBuilder.ApplyConfiguration(new CategoryEntityConfiguration());
-        modelBuilder.ApplyConfiguration(new ProductCategoryEntityConfiguration());
         modelBuilder.ApplyConfiguration(new CheckEntityConfiguration());
-        modelBuilder.ApplyConfiguration(new CheckProductConfiguration());
     }
 }
