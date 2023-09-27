@@ -5,11 +5,6 @@ namespace CrudApp.Core.Domain.Categories.Models;
 
 public class Category
 {
-    private Category()
-    {
-
-    }
-
     public Category(string name)
     {
         Name = name;
@@ -19,7 +14,7 @@ public class Category
 
     public string Name { get; set; }
 
-    public IReadOnlyCollection<ProductCategory> ProductCategory { get; set; }
+    public ICollection<Product> Products { get; set; }
 
     public static async Task<Category> CreateAsync(string name)
     {

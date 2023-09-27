@@ -4,49 +4,82 @@
 
 namespace CrudApp.Persistence.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class UpdateProductCategoryCheck : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CheckProducts");
+
+            migrationBuilder.DropTable(
+                name: "ProductsCategories");
+
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "CategoryProduct",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CategoriesId = table.Column<long>(type: "bigint", nullable: false),
+                    ProductsId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.PrimaryKey("PK_CategoryProduct", x => new { x.CategoriesId, x.ProductsId });
+                    table.ForeignKey(
+                        name: "FK_CategoryProduct_Categories_CategoriesId",
+                        column: x => x.CategoriesId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CategoryProduct_Products_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Receipts",
+                name: "CheckProduct",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                    ChecksId = table.Column<long>(type: "bigint", nullable: false),
+                    ProductsId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Checks", x => x.Id);
+                    table.PrimaryKey("PK_CheckProduct", x => new { x.ChecksId, x.ProductsId });
+                    table.ForeignKey(
+                        name: "FK_CheckProduct_Checks_ChecksId",
+                        column: x => x.ChecksId,
+                        principalTable: "Receipts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CheckProduct_Products_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryProduct_ProductsId",
+                table: "CategoryProduct",
+                column: "ProductsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CheckProduct_ProductsId",
+                table: "CheckProduct",
+                column: "ProductsId");
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "CategoryProduct");
+
+            migrationBuilder.DropTable(
+                name: "CheckProduct");
 
             migrationBuilder.CreateTable(
                 name: "CheckProducts",
@@ -105,24 +138,6 @@ namespace CrudApp.Persistence.Migrations
                 name: "IX_ProductsCategories_CategoryId",
                 table: "ProductsCategories",
                 column: "CategoryId");
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "CheckProducts");
-
-            migrationBuilder.DropTable(
-                name: "ProductsCategories");
-
-            migrationBuilder.DropTable(
-                name: "Receipts");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Products");
         }
     }
 }

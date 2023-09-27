@@ -3,6 +3,7 @@ using CrudApp.Persistence.CrudAppDb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CrudApp.Persistence.Migrations
 {
     [DbContext(typeof(CrudAppDbContext))]
-    partial class CrudAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230926140455_UpdateProductCategoryCheck")]
+    partial class UpdateProductCategoryCheck
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,7 +70,7 @@ namespace CrudApp.Persistence.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("CrudApp.Core.Domain.Receipts.Models.Receipt", b =>
+            modelBuilder.Entity("CrudApp.Core.Domain.Checks.Models.Check", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,7 +80,7 @@ namespace CrudApp.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Receipts");
+                    b.ToTable("Checks");
                 });
 
             modelBuilder.Entity("CrudApp.Core.Domain.Products.Models.Product", b =>
@@ -121,7 +123,7 @@ namespace CrudApp.Persistence.Migrations
 
             modelBuilder.Entity("CheckProduct", b =>
                 {
-                    b.HasOne("CrudApp.Core.Domain.Receipts.Models.Receipt", null)
+                    b.HasOne("CrudApp.Core.Domain.Checks.Models.Check", null)
                         .WithMany()
                         .HasForeignKey("ChecksId")
                         .OnDelete(DeleteBehavior.Cascade)

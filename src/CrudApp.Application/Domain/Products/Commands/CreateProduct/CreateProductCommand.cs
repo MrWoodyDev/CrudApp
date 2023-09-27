@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using CrudApp.Core.Domain.Categories.Models;
+using MediatR;
 
 namespace CrudApp.Application.Domain.Products.Commands.CreateProduct;
 
