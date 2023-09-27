@@ -1,16 +1,11 @@
 ﻿using CrudApp.Core.Domain.Categories.Models;
-using CrudApp.Core.Domain.Checks.Models;
 using CrudApp.Core.Domain.Products.Data;
+using CrudApp.Core.Domain.Receipts.Models;
 
 namespace CrudApp.Core.Domain.Products.Models;
 
 public class Product
 {
-    private Product()
-    {
-        
-    }
-
     public Product(
         string name, 
         decimal price, 
@@ -31,10 +26,11 @@ public class Product
 
     public ICollection<Category> Categories { get; set; }
 
-    public ICollection<Check> Checks { get; set; }
+    public ICollection<Receipt> Receipts { get; set; }
 
     public static async Task<Product> CreateAsync(string name, decimal price, int quantity)
     {
+
         var product = new Product(name, price, quantity);
         return product;
     }

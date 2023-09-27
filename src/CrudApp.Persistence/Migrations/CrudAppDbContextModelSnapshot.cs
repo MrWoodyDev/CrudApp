@@ -68,7 +68,7 @@ namespace CrudApp.Persistence.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("CrudApp.Core.Domain.Checks.Models.Check", b =>
+            modelBuilder.Entity("CrudApp.Core.Domain.Receipts.Models.Receipt", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,7 +78,7 @@ namespace CrudApp.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Checks");
+                    b.ToTable("Receipts");
                 });
 
             modelBuilder.Entity("CrudApp.Core.Domain.Products.Models.Product", b =>
@@ -121,7 +121,7 @@ namespace CrudApp.Persistence.Migrations
 
             modelBuilder.Entity("CheckProduct", b =>
                 {
-                    b.HasOne("CrudApp.Core.Domain.Checks.Models.Check", null)
+                    b.HasOne("CrudApp.Core.Domain.Receipts.Models.Receipt", null)
                         .WithMany()
                         .HasForeignKey("ChecksId")
                         .OnDelete(DeleteBehavior.Cascade)

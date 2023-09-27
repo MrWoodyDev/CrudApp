@@ -22,7 +22,7 @@ namespace CrudApp.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Checks",
+                name: "Receipts",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -61,7 +61,7 @@ namespace CrudApp.Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_CheckProducts_Checks_CheckId",
                         column: x => x.CheckId,
-                        principalTable: "Checks",
+                        principalTable: "Receipts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -116,7 +116,7 @@ namespace CrudApp.Persistence.Migrations
                 name: "ProductsCategories");
 
             migrationBuilder.DropTable(
-                name: "Checks");
+                name: "Receipts");
 
             migrationBuilder.DropTable(
                 name: "Categories");

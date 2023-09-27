@@ -51,7 +51,7 @@ namespace CrudApp.Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_CheckProduct_Checks_ChecksId",
                         column: x => x.ChecksId,
-                        principalTable: "Checks",
+                        principalTable: "Receipts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -94,7 +94,7 @@ namespace CrudApp.Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_CheckProducts_Checks_CheckId",
                         column: x => x.CheckId,
-                        principalTable: "Checks",
+                        principalTable: "Receipts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(

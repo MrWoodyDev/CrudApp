@@ -1,6 +1,6 @@
 ﻿using CrudApp.Core.Domain.Categories.Models;
-using CrudApp.Core.Domain.Checks.Models;
 using CrudApp.Core.Domain.Products.Models;
+using CrudApp.Core.Domain.Receipts.Models;
 using CrudApp.Persistence.CrudAppDb.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +17,7 @@ public class CrudAppDbContext : DbContext
 
     public DbSet<Category> Categories { get; set; }
 
-    public DbSet<Check> Checks { get; set; }
+    public DbSet<Receipt> Receipts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -27,6 +27,6 @@ public class CrudAppDbContext : DbContext
     {
         modelBuilder.ApplyConfiguration(new ProductEntityConfiguration());
         modelBuilder.ApplyConfiguration(new CategoryEntityConfiguration());
-        modelBuilder.ApplyConfiguration(new CheckEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new ReceiptEntityConfiguration());
     }
 }
