@@ -1,3 +1,5 @@
+using CrudApp.Application;
+using CrudApp.Infrastructure;
 using CrudApp.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddInfrastructureRegistration();
+builder.Services.AddApplicationRegistration();
 
 var app = builder.Build();
 

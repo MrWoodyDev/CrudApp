@@ -17,6 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CrudApp.Application\CrudApp.Application.csproj" />
+    <ProjectReference Include="..\CrudApp.Infrastructure\CrudApp.Infrastructure.csproj" />
     <ProjectReference Include="..\CrudApp.Persistence\CrudApp.Persistence.csproj" />
   </ItemGroup>
 
