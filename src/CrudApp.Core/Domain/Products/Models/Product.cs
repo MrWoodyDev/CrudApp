@@ -6,14 +6,21 @@ namespace CrudApp.Core.Domain.Products.Models;
 
 public class Product
 {
+    private Product()
+    {
+
+    }
+
     public Product(
         string name, 
         decimal price, 
-        int quantity)
+        int quantity,
+        ICollection<Category> categories)
     {
         Name = name;
         Price = price;
         Quantity = quantity;
+        Categories = categories;
     }
 
     public long Id { get; private set; }
@@ -28,10 +35,9 @@ public class Product
 
     public ICollection<Receipt> Receipts { get; set; }
 
-    public static async Task<Product> CreateAsync(string name, decimal price, int quantity)
+    public static async Task<Product> CreateAsync(string name, decimal price, int quantity, ICollection<Category> categories)
     {
-
-        var product = new Product(name, price, quantity);
+        var product = new Product(name, price, quantity, categories);
         return product;
     }
 
@@ -40,5 +46,6 @@ public class Product
         Name = data.Name;
         Price = data.Price;
         Quantity = data.Quantity;
+        Categories = data.Categories;
     }
 }

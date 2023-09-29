@@ -5,6 +5,11 @@ namespace CrudApp.Core.Domain.Categories.Models;
 
 public class Category
 {
+    private Category()
+    {
+
+    }
+
     public Category(string name)
     {
         Name = name;

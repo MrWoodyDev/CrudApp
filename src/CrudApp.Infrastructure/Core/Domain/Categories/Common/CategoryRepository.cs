@@ -3,7 +3,7 @@ using CrudApp.Core.Domain.Categories.Models;
 using CrudApp.Persistence.CrudAppDb;
 using Microsoft.EntityFrameworkCore;
 
-namespace CrudApp.Infrastructure.Core.Domain.Categories;
+namespace CrudApp.Infrastructure.Core.Domain.Categories.Common;
 
 public class CategoryRepository : ICategoryRepository
 {
@@ -18,6 +18,12 @@ public class CategoryRepository : ICategoryRepository
     {
         var category = await _context.Categories.FirstOrDefaultAsync(category => category.Id == id);
         return category ?? throw new InvalidOperationException();
+    }
+
+    public async Task<ICollection<Category>> FindByIdsAsync(ICollection<long> ids)
+    {
+        var categories = await _context.Categories.Where(c => ids.Contains(c.Id)).ToListAsync();
+        return categories;
     }
 
     public async Task AddAsync(Category category)

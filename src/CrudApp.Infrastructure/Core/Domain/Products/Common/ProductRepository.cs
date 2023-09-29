@@ -16,8 +16,14 @@ public class ProductRepository : IProductRepository
 
     public async Task<Product> FindAsync(long id)
     {
-        var product = await _context.Products.FirstOrDefaultAsync(product => product.Id == id);
+        var product = await _context.Products.Include(p => p.Categories).FirstOrDefaultAsync(p => p.Id == id);
         return product ?? throw new InvalidOperationException();
+    }
+
+    public async Task<ICollection<Product>> FindByIdsAsync(ICollection<long> ids)
+    {
+        var products = await _context.Products.Where(p => ids.Contains(p.Id)).ToListAsync();
+        return products;
     }
 
     public async Task AddAsync(Product product)

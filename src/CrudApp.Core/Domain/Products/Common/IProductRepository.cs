@@ -6,6 +6,8 @@ public interface IProductRepository
 {
     Task<Product> FindAsync(long id);
 
+    Task<ICollection<Product>> FindByIdsAsync(ICollection<long> ids);
+
     Task AddAsync(Product product);
 
     Task DeleteAsync(long id);

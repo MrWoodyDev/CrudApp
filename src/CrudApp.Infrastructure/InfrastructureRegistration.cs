@@ -1,11 +1,11 @@
 ﻿using CrudApp.Core.Common;
 using CrudApp.Core.Domain.Categories.Common;
-using CrudApp.Core.Domain.Checks.Common;
 using CrudApp.Core.Domain.Products.Common;
+using CrudApp.Core.Domain.Receipts.Common;
 using CrudApp.Infrastructure.Core.Common;
-using CrudApp.Infrastructure.Core.Domain.Categories;
-using CrudApp.Infrastructure.Core.Domain.Checks;
+using CrudApp.Infrastructure.Core.Domain.Categories.Common;
 using CrudApp.Infrastructure.Core.Domain.Products.Common;
+using CrudApp.Infrastructure.Core.Domain.Receipts.Common;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,6 +23,6 @@ public static class InfrastructureRegistration
         //Repositories
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
-        services.AddScoped<ICheckRepository, CheckRepository>();
+        services.AddScoped<IReceiptRepository, ReceiptRepository>();
     }
 }

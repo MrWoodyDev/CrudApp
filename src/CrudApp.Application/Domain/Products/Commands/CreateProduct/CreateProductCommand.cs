@@ -1,6 +1,5 @@
-﻿using CrudApp.Core.Domain.Categories.Models;
-using MediatR;
+﻿using MediatR;
 
 namespace CrudApp.Application.Domain.Products.Commands.CreateProduct;
 
-public record CreateProductCommand(string Name, decimal Price, int Quantity) : IRequest<long>;
+public record CreateProductCommand(string Name, decimal Price, int Quantity, ICollection<long> CategoryIds) : IRequest<long>;

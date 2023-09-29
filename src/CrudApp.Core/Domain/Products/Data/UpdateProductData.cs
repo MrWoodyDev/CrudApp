@@ -1,3 +1,5 @@
-﻿namespace CrudApp.Core.Domain.Products.Data;
+﻿using CrudApp.Core.Domain.Categories.Models;
 
-public record UpdateProductData(string Name, decimal Price, int Quantity);
+namespace CrudApp.Core.Domain.Products.Data;
+
+public record UpdateProductData(string Name, decimal Price, int Quantity, ICollection<Category> Categories);
