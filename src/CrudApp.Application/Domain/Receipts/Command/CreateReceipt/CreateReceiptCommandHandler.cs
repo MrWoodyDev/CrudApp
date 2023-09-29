@@ -6,7 +6,7 @@ using MediatR;
 
 namespace CrudApp.Application.Domain.Receipts.Command.CreateReceipt;
 
-public class CreateReceiptCommandHandler : IRequestHandler<CreateReceiptCommand, long>
+public class CreateReceiptCommandHandler : IRequestHandler<CreateReceiptCommand, Guid>
 {
     private readonly IReceiptRepository _receiptRepository;
     private readonly IProductRepository _productRepository;
@@ -19,7 +19,7 @@ public class CreateReceiptCommandHandler : IRequestHandler<CreateReceiptCommand,
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<long> Handle(CreateReceiptCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateReceiptCommand request, CancellationToken cancellationToken)
     {
         var products = await _productRepository.FindByIdsAsync(request.ProductsId);
         var receipt = await Receipt.AddAsync(products);

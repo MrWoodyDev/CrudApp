@@ -14,13 +14,13 @@ public class ProductRepository : IProductRepository
         _context = context;
     }
 
-    public async Task<Product> FindAsync(long id)
+    public async Task<Product> FindAsync(Guid id)
     {
         var product = await _context.Products.Include(p => p.Categories).FirstOrDefaultAsync(p => p.Id == id);
         return product ?? throw new InvalidOperationException();
     }
 
-    public async Task<ICollection<Product>> FindByIdsAsync(ICollection<long> ids)
+    public async Task<ICollection<Product>> FindByIdsAsync(ICollection<Guid> ids)
     {
         var products = await _context.Products.Where(p => ids.Contains(p.Id)).ToListAsync();
         return products;
@@ -31,7 +31,7 @@ public class ProductRepository : IProductRepository
         await _context.AddAsync(product);
     }
 
-    public async Task DeleteAsync(long id)
+    public async Task DeleteAsync(Guid id)
     {
         var productToBeRemove = await _context.Products.FirstOrDefaultAsync(product => product.Id == id);
         if (productToBeRemove is null) throw new InvalidOperationException(); 

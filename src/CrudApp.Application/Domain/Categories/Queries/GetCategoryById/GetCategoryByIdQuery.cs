@@ -2,4 +2,4 @@
 
 namespace CrudApp.Application.Domain.Categories.Queries.GetCategoryById;
 
-public record GetCategoryByIdQuery(long Id) : IRequest<CategoryByIdDto>;
+public record GetCategoryByIdQuery(Guid Id) : IRequest<CategoryByIdDto>;

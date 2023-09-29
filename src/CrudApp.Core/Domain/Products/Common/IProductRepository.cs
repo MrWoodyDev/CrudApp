@@ -4,11 +4,11 @@ namespace CrudApp.Core.Domain.Products.Common;
 
 public interface IProductRepository
 {
-    Task<Product> FindAsync(long id);
+    Task<Product> FindAsync(Guid id);
 
-    Task<ICollection<Product>> FindByIdsAsync(ICollection<long> ids);
+    Task<ICollection<Product>> FindByIdsAsync(ICollection<Guid> ids);
 
     Task AddAsync(Product product);
 
-    Task DeleteAsync(long id);
+    Task DeleteAsync(Guid id);
 }

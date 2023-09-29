@@ -5,7 +5,7 @@ using MediatR;
 
 namespace CrudApp.Application.Domain.Categories.Commands.CreateCategory;
 
-public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, long>
+public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, Guid>
 {
     private readonly ICategoryRepository _categoryRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -16,7 +16,7 @@ public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryComman
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<long> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
         var category = await Category.CreateAsync(request.Name);
         await _categoryRepository.AddAsync(category);

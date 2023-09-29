@@ -2,4 +2,4 @@
 
 namespace CrudApp.Application.Domain.Categories.Commands.CreateCategory;
 
-public record CreateCategoryCommand(string Name) : IRequest<long>;
+public record CreateCategoryCommand(string Name) : IRequest<Guid>;

@@ -1,3 +1,3 @@
 ﻿namespace CrudApp.Api.Domain.Products.Requests;
 
-public record UpdateProductRequest(long Id, string Name, decimal Price, int Quantity, ICollection<long> CategoriesId);
+public record UpdateProductRequest(Guid Id, string Name, decimal Price, int Quantity, ICollection<Guid> CategoriesId);

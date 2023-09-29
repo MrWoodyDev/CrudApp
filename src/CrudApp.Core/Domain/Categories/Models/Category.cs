@@ -10,12 +10,13 @@ public class Category
 
     }
 
-    public Category(string name)
+    public Category(Guid id, string name)
     {
+        Id = id;
         Name = name;
     }
 
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 
     public string Name { get; set; }
 
@@ -23,7 +24,7 @@ public class Category
 
     public static async Task<Category> CreateAsync(string name)
     {
-        var category = new Category(name);
+        var category = new Category(Guid.NewGuid(), name);
         return category;
     }
 

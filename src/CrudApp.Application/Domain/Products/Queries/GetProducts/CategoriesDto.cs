@@ -2,7 +2,7 @@
 
 public record CategoriesDto
 {
-    public long CategoryId { get; init; }
+    public Guid CategoryId { get; init; }
 
     public string Name { get; init; }
 }

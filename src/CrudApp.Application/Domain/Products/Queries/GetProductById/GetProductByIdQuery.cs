@@ -2,4 +2,4 @@
 
 namespace CrudApp.Application.Domain.Products.Queries.GetProductById;
 
-public record GetProductByIdQuery(long Id) : IRequest<ProductByIdDto>;
+public record GetProductByIdQuery(Guid Id) : IRequest<ProductByIdDto>;

@@ -1,3 +1,3 @@
 ﻿namespace CrudApp.Api.Domain.Categories.Requests;
 
-public record UpdateCategoryRequest(long Id, string Name);
+public record UpdateCategoryRequest(Guid Id, string Name);
