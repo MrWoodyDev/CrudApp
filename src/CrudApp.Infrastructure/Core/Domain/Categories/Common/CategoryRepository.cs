@@ -14,13 +14,13 @@ public class CategoryRepository : ICategoryRepository
         _context = context;
     }
 
-    public async Task<Category> FindAsync(long id)
+    public async Task<Category> FindAsync(Guid id)
     {
         var category = await _context.Categories.FirstOrDefaultAsync(category => category.Id == id);
         return category ?? throw new InvalidOperationException();
     }
 
-    public async Task<ICollection<Category>> FindByIdsAsync(ICollection<long> ids)
+    public async Task<ICollection<Category>> FindByIdsAsync(ICollection<Guid> ids)
     {
         var categories = await _context.Categories.Where(c => ids.Contains(c.Id)).ToListAsync();
         return categories;
@@ -31,7 +31,7 @@ public class CategoryRepository : ICategoryRepository
         await _context.AddAsync(category);
     }
 
-    public async Task DeleteAsync(long id)
+    public async Task DeleteAsync(Guid id)
     {
         var categoryToBeRemove = await _context.Categories.FirstOrDefaultAsync(category => category.Id == id);
         if (categoryToBeRemove is null) throw new InvalidOperationException();

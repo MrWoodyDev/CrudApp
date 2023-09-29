@@ -12,18 +12,20 @@ public class Product
     }
 
     public Product(
+        Guid id,
         string name, 
         decimal price, 
         int quantity,
         ICollection<Category> categories)
     {
+        Id = id;
         Name = name;
         Price = price;
         Quantity = quantity;
         Categories = categories;
     }
 
-    public long Id { get; private set; }
+    public Guid Id { get; private set; }
 
     public string Name { get; set; }
 
@@ -37,7 +39,7 @@ public class Product
 
     public static async Task<Product> CreateAsync(string name, decimal price, int quantity, ICollection<Category> categories)
     {
-        var product = new Product(name, price, quantity, categories);
+        var product = new Product(Guid.NewGuid(), name, price, quantity, categories);
         return product;
     }
 

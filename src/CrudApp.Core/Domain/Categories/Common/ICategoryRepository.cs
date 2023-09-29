@@ -4,11 +4,11 @@ namespace CrudApp.Core.Domain.Categories.Common;
 
 public interface ICategoryRepository
 {
-    Task<Category> FindAsync(long id);
+    Task<Category> FindAsync(Guid id);
 
-    Task<ICollection<Category>> FindByIdsAsync(ICollection<long> ids);
+    Task<ICollection<Category>> FindByIdsAsync(ICollection<Guid> ids);
 
     Task AddAsync(Category category);
 
-    Task DeleteAsync(long id);
+    Task DeleteAsync(Guid id);
 }

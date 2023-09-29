@@ -1,3 +1,3 @@
 ﻿namespace CrudApp.Api.Domain.Categories.Requests;
 
-public record RemoveCategoryRequest(long Id);
+public record RemoveCategoryRequest(Guid Id);

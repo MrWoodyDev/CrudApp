@@ -10,18 +10,19 @@ public class Receipt
 
     }
 
-    public Receipt(ICollection<Product> products)
+    public Receipt(Guid id, ICollection<Product> products)
     {
+        Id = id;
         Products = products;
     }
 
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 
     public ICollection<Product> Products { get; set; }
 
     public static async Task<Receipt> AddAsync(ICollection<Product> products)
     {
-        var receipt = new Receipt(products);
+        var receipt = new Receipt(Guid.NewGuid(), products);
         return receipt;
     }
 

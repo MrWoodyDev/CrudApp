@@ -27,7 +27,7 @@ public class ReceiptController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ReceiptByIdDto> GetReceiptByIdAsync(long id, CancellationToken cancellationToken)
+    public async Task<ReceiptByIdDto> GetReceiptByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         var query = new GetReceiptByIdQuery(id);
         return await _mediator.Send(query, cancellationToken);

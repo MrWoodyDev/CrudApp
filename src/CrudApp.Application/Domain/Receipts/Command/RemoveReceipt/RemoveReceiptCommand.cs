@@ -2,4 +2,4 @@
 
 namespace CrudApp.Application.Domain.Receipts.Command.RemoveReceipt;
 
-public record RemoveReceiptCommand(long Id) : IRequest<Unit>;
+public record RemoveReceiptCommand(Guid Id) : IRequest<Unit>;

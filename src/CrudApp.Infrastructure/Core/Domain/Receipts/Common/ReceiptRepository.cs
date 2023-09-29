@@ -14,7 +14,7 @@ public class ReceiptRepository : IReceiptRepository
         _context = context;
     }
 
-    public async Task<Receipt> FindAsync(long id)
+    public async Task<Receipt> FindAsync(Guid id)
     {
         var receipt = await _context.Receipts.Include(p => p.Products).SingleOrDefaultAsync(receipt => receipt.Id == id);
         return receipt ?? throw new InvalidOperationException();
@@ -25,7 +25,7 @@ public class ReceiptRepository : IReceiptRepository
         await _context.AddAsync(receipt);
     }
 
-    public async Task DeleteAsync(long id)
+    public async Task DeleteAsync(Guid id)
     {
         var receiptToBeRemove = await _context.Receipts.SingleOrDefaultAsync(check => check.Id == id);
         if (receiptToBeRemove is null) throw new InvalidOperationException();

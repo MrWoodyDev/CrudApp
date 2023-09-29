@@ -4,7 +4,7 @@ namespace CrudApp.Application.Domain.Categories.Queries.GetCategoryById;
 
 public record CategoryByIdDto
 {
-    public long CategoryId { get; set; }
+    public Guid CategoryId { get; set; }
 
     public string Name { get; set; }
 
