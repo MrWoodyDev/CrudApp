@@ -3,7 +3,7 @@ using CrudApp.Persistence.CrudAppDb;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CrudApp.Infrastructure.Core.Domain.Categories.Queries;
+namespace CrudApp.Infrastructure.Core.Domain.Categories.Queries.GetCategories;
 
 public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, CategoryDto[]>
 {

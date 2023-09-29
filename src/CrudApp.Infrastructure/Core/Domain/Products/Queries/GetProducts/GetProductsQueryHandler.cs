@@ -3,7 +3,7 @@ using CrudApp.Persistence.CrudAppDb;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CrudApp.Infrastructure.Core.Domain.Products.Queries;
+namespace CrudApp.Infrastructure.Core.Domain.Products.Queries.GetProducts;
 
 public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, (ProductDto[] data, int total)>
 {

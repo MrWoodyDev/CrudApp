@@ -4,6 +4,7 @@ using CrudApp.Api.Domain.Products.Requests;
 using CrudApp.Application.Domain.Products.Commands.CreateProduct;
 using CrudApp.Application.Domain.Products.Commands.RemoveProduct;
 using CrudApp.Application.Domain.Products.Commands.UpdateProduct;
+using CrudApp.Application.Domain.Products.Queries.GetProductById;
 using CrudApp.Application.Domain.Products.Queries.GetProducts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,11 +22,18 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<PaginationResponse<ProductDto[]>> GetProducts(int pageNumber, int pageSize, CancellationToken cancellationToken)
+    public async Task<PaginationResponse<ProductDto[]>> GetProductsAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
     {
         var query = new GetProductsQuery(pageNumber, pageSize);
         var response = await _mediator.Send(query, cancellationToken);
         return new PaginationResponse<ProductDto[]>(response.data, response.total);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ProductByIdDto> GetProductByIdAsync(long id, CancellationToken cancellationToken)
+    {
+        var query = new GetProductByIdQuery(id);
+        return await _mediator.Send(query, cancellationToken);
     }
 
     [HttpPost]
@@ -45,8 +53,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteAsync([FromBody] RemoveProductRequest request,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> DeleteAsync([FromBody] RemoveProductRequest request, CancellationToken cancellationToken)
     {
         var command = new RemoveProductCommand(request.Id);
         await _mediator.Send(command, cancellationToken);

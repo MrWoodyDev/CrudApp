@@ -2,7 +2,8 @@
 using CrudApp.Api.Domain.Receipts.Requests;
 using CrudApp.Application.Domain.Receipts.Command.CreateReceipt;
 using CrudApp.Application.Domain.Receipts.Command.RemoveReceipt;
-using CrudApp.Application.Domain.Receipts.GetReceipts;
+using CrudApp.Application.Domain.Receipts.Queries.GetReceiptById;
+using CrudApp.Application.Domain.Receipts.Queries.GetReceipts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,14 @@ public class ReceiptController : ControllerBase
     [HttpGet]
     public async Task<ReceiptDto[]> GetReceiptsAsync(CancellationToken cancellationToken)
     {
-        var query = new GetReceiptQuery();
+        var query = new GetReceiptsQuery();
+        return await _mediator.Send(query, cancellationToken);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ReceiptByIdDto> GetReceiptByIdAsync(long id, CancellationToken cancellationToken)
+    {
+        var query = new GetReceiptByIdQuery(id);
         return await _mediator.Send(query, cancellationToken);
     }
 

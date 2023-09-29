@@ -1,15 +1,31 @@
 using CrudApp.Application;
 using CrudApp.Infrastructure;
 using CrudApp.Persistence;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.EnableAnnotations();
+    options.CustomSchemaIds(type => type.ToString());
+    options.CustomOperationIds(apiDescription => 
+        apiDescription.TryGetMethodInfo(out var methodInfo)
+        ? methodInfo.Name
+        : null);
+});
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddInfrastructureRegistration();
 builder.Services.AddApplicationRegistration();
@@ -20,7 +36,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options => options.DisplayOperationId());
 }
 
 app.UseHttpsRedirection();
@@ -28,5 +44,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors();
 
 app.Run();
