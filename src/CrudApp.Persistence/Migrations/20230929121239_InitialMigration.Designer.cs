@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CrudApp.Persistence.Migrations
 {
     [DbContext(typeof(CrudAppDbContext))]
-    [Migration("20230929101838_InitialMigration")]
+    [Migration("20230929121239_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

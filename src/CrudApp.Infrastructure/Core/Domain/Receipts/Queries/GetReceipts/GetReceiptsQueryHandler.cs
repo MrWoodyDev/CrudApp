@@ -23,16 +23,16 @@ public class GetReceiptsQueryHandler : IRequestHandler<GetReceiptsQuery, Receipt
             .Include(receipt => receipt.Products)
             .Select(receipt => new ReceiptDto
             {
-                ReceiptId = receipt.Id,
+                Id = receipt.Id,
                 ProductsCollection = receipt.Products.Select(product => new ProductDto
                 {
-                    ProductId = product.Id,
+                    Id = product.Id,
                     Name = product.Name,
                     Price = product.Price,
                     Quantity = product.Quantity,
                         CategoriesCollection = product.Categories.Select(category => new CategoriesDto
                     {
-                        CategoryId = category.Id,
+                        Id = category.Id,
                         Name = category.Name
                     }).ToList()
                 }).ToList(),

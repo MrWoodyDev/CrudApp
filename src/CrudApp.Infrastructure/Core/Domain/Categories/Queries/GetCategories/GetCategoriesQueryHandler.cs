@@ -22,11 +22,11 @@ public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, Cat
             .Include(category => category.Products)
             .Select(category => new CategoryDto
             {
-                CategoryId = category.Id,
+                Id = category.Id,
                 Name = category.Name,
                 ProductsCollection = category.Products.Select(products => new ProductsDto
                 {
-                    ProductId = products.Id,
+                    Id = products.Id,
                     Name = products.Name,
                     Price = products.Price,
                     Quantity = products.Quantity

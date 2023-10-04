@@ -4,7 +4,7 @@ namespace CrudApp.Application.Domain.Receipts.Queries.GetReceiptById;
 
 public record ReceiptByIdDto
 {
-    public Guid ReceiptId { get; init; }
+    public Guid Id { get; init; }
 
     public IReadOnlyCollection<ProductDto> ProductsCollection { get; init; }
 }

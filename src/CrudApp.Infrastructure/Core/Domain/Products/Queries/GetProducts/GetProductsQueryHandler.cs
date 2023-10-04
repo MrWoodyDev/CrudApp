@@ -21,17 +21,18 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, (Produc
         var data = await sqlQuery
             .OrderByDescending(product => product.Id)
             .Include(product => product.Categories)
+            .Where(product => product.Categories.Any(category => category.Id == request.CategoryId) || request.CategoryId == Guid.Empty)
             .Skip(skip)
             .Take(request.PageSize)
             .Select(product => new ProductDto
             {
-                ProductId = product.Id,
+                Id = product.Id,
                 Name = product.Name,
                 Price = product.Price,
                 Quantity = product.Quantity,
                 CategoriesCollection = product.Categories.Select(category => new CategoriesDto
                 {
-                    CategoryId = category.Id,
+                    Id = category.Id,
                     Name = category.Name
                 }).ToList(),
             }).ToArrayAsync(cancellationToken);

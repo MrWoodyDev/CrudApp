@@ -2,7 +2,7 @@
 
 public record CategoryDto
 {
-    public Guid CategoryId { get; init; }
+    public Guid Id { get; init; }
 
     public string Name { get; init; }
 

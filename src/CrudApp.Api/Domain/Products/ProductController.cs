@@ -22,9 +22,9 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<PaginationResponse<ProductDto[]>> GetProductsAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
+    public async Task<PaginationResponse<ProductDto[]>> GetProductsAsync(int pageNumber, int pageSize, Guid categoryId, CancellationToken cancellationToken)
     {
-        var query = new GetProductsQuery(pageNumber, pageSize);
+        var query = new GetProductsQuery(pageNumber, pageSize, categoryId);
         var response = await _mediator.Send(query, cancellationToken);
         return new PaginationResponse<ProductDto[]>(response.data, response.total);
     }

@@ -23,16 +23,16 @@ public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery,
             .Include(category => category.Products)
             .Select(category => new CategoryByIdDto
             {
-                CategoryId = category.Id,
+                Id = category.Id,
                 Name = category.Name,
                 ProductsCollection = category.Products.Select(product => new ProductsDto
                 {
-                    ProductId = product.Id,
+                    Id = product.Id,
                     Name = product.Name,
                     Price = product.Price,
                     Quantity = product.Quantity
                 }).ToList()
-            }).FirstOrDefaultAsync(category => category.CategoryId == request.Id, cancellationToken);
+            }).FirstOrDefaultAsync(category => category.Id == request.Id, cancellationToken);
         return data;
     }
 }

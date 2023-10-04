@@ -2,7 +2,7 @@
 
 public record ProductsDto
 {
-    public Guid ProductId { get; init; }
+    public Guid Id { get; init; }
 
     public string Name { get; init; }
 

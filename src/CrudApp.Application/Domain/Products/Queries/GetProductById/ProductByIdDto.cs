@@ -4,7 +4,7 @@ namespace CrudApp.Application.Domain.Products.Queries.GetProductById;
 
 public record ProductByIdDto
 {
-    public Guid ProductId { get; init; }
+    public Guid Id { get; init; }
 
     public string Name { get; init; }
 

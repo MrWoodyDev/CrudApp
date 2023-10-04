@@ -23,20 +23,20 @@ public class GetReceiptByIdQueryHandler : IRequestHandler<GetReceiptByIdQuery, R
             .Include(receipt => receipt.Products)
             .Select(receipt => new ReceiptByIdDto
             {
-                ReceiptId = receipt.Id,
+                Id = receipt.Id,
                 ProductsCollection = receipt.Products.Select(product => new ProductDto
                 {
-                    ProductId = product.Id,
+                    Id = product.Id,
                     Name = product.Name,
                     Price = product.Price,
                     Quantity = product.Quantity,
                     CategoriesCollection = product.Categories.Select(category => new CategoriesDto
                     {
-                        CategoryId = category.Id,
+                        Id = category.Id,
                         Name = category.Name
                     }).ToList()
                 }).ToList()
-            }).FirstOrDefaultAsync(receipt => receipt.ReceiptId == request.Id, cancellationToken);
+            }).FirstOrDefaultAsync(receipt => receipt.Id == request.Id, cancellationToken);
         return data;
     }
 }
